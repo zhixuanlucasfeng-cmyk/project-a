@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Project A</title>
+<style>
+:root{--bg:#faf9f6;--surface:#fff;--raised:#f3f1ea;--border:#ddd7c9;--text:#1b1a17;--muted:#6a645a;
+  --accent:#14566b;--accent-ink:#fff;--success:#1f6b42;--danger:#a32a2a;--focus:#1a5fb4}
+@media (prefers-color-scheme:dark){:root{--bg:#15181d;--surface:#1a1e24;--raised:#222830;--border:#333b45;
+  --text:#eef1f4;--muted:#8b95a0;--accent:#7cc7dd;--accent-ink:#0a2029;--success:#7fd3a4;--danger:#ef7d7d;--focus:#9cdcff}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:17px/1.55 Georgia,"Iowan Old Style",serif}
+main{max-width:760px;margin:0 auto;padding:24px 16px 64px}
+header{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:1px solid var(--border);padding-bottom:12px;margin-bottom:24px}
+h1{font-size:28px;margin:0}h2{font-size:21px;margin:28px 0 10px}
+.muted{color:var(--muted);font-size:15px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:18px;margin:12px 0}
+label{display:block;font-size:15px;color:var(--muted);margin:10px 0 4px}
+input,textarea,select{width:100%;font:inherit;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:8px 10px}
+textarea{min-height:160px;resize:vertical}
+button{font:inherit;font-size:16px;cursor:pointer;border-radius:4px;padding:8px 16px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink)}
+button.plain{background:transparent;color:var(--accent)}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.row{display:flex;gap:10px;align-items:end;flex-wrap:wrap}.row>*{flex:1;min-width:140px}.row>button{flex:0 0 auto}
+.err{color:var(--danger);min-height:1.5em;font-size:15px}
+.big{font-size:34px;line-height:1}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.ch{display:grid;grid-template-columns:1fr 120px 52px;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:15px}
+.ch button{padding:2px 8px;font-size:14px}
+.bar{height:8px;background:var(--raised);border-radius:4px;overflow:hidden}.bar i{display:block;height:100%;background:var(--accent)}
+.point{padding:6px 0 6px 28px;position:relative}.point::before{position:absolute;left:0;font-weight:bold}
+.point.hit::before{content:"✓";color:var(--success)}.point.miss::before{content:"✗";color:var(--danger)}
+.point.miss{color:var(--danger)}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:6px 4px;border-bottom:1px solid var(--border);text-align:left}
+.scroll{overflow-x:auto}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<main>
+<header><h1>Project A</h1><span id="who" class="muted"></span></header>
+
+<!-- sign in / sign up -->
+<section id="v-auth" class="hidden">
+  <p>Revise for Cambridge 9618 AS Computer Science by explaining every topic in your own words. Each answer is marked against mark-scheme points, and anything you miss comes back until you've got it.</p>
+  <div class="card">
+    <h2 id="auth-title" style="margin-top:0">Log in</h2>
+    <form id="f-auth">
+      <div id="signup-only" class="hidden">
+        <label for="a-name">Name</label><input id="a-name" autocomplete="name">
+        <label for="a-role">I am a</label>
+        <select id="a-role"><option value="student">Student</option><option value="teacher">Teacher</option></select>
+      </div>
+      <label for="a-email">Email</label><input id="a-email" type="email" autocomplete="email" required>
+      <label for="a-pw">Password (8+ characters)</label><input id="a-pw" type="password" autocomplete="current-password" required minlength="8">
+      <p class="err" id="auth-err"></p>
+      <div class="row"><button>Continue</button><button type="button" class="plain" id="auth-toggle">New here? Create an account</button></div>
+    </form>
+  </div>
+</section>
+
+<!-- student home -->
+<section id="v-student" class="hidden">
+  <div class="stats">
+    <div class="card"><div class="muted">Days to exam</div><div class="big" id="s-days">–</div></div>
+    <div class="card"><div class="muted">Mark points learned</div><div class="big" id="s-learned">–</div></div>
+    <div class="card"><div class="muted">Today</div><div class="big" id="s-today">–</div></div>
+  </div>
+  <div class="card">
+    <div class="row">
+      <div><label for="s-date">My exam date</label><input id="s-date" type="date"></div>
+      <button id="s-save-date" class="plain">Save</button>
+      <button id="s-start">Start revising</button>
+    </div>
+  </div>
+  <h2>Chapters</h2>
+  <div id="s-chapters"></div>
+  <h2>Join a class</h2>
+  <form class="row" id="f-join"><div><label for="j-code">Class code from your teacher</label><input id="j-code" maxlength="12"></div><button class="plain">Join</button></form>
+  <p class="err" id="join-msg"></p>
+</section>
+
+<!-- practice -->
+<section id="v-practice" class="hidden">
+  <p><button class="plain" id="p-back">← Back</button> <span class="muted" id="p-chapter"></span></p>
+  <div class="card">
+    <p id="p-question" style="font-size:20px;margin-top:0"></p>
+    <p class="muted">[<span id="p-marks"></span> marks] Explain it as if you're teaching a classmate who has never seen this topic. Don't look at your notes.</p>
+    <form id="f-answer">
+      <label for="p-answer">Your explanation</label>
+      <textarea id="p-answer" required></textarea>
+      <p class="err" id="p-err"></p>
+      <button>Mark my answer</button>
+    </form>
+  </div>
+  <div class="card hidden" id="p-result">
+    <h2 style="margin-top:0">You got <span id="p-score"></span></h2>
+    <div id="p-points"></div>
+    <p class="muted" id="p-advice"></p>
+    <div class="row"><button class="plain" id="p-retry">Explain it again</button><button id="p-next">Next question</button></div>
+  </div>
+</section>
+
+<!-- teacher -->
+<section id="v-teacher" class="hidden">
+  <form class="row card" id="f-class"><div><label for="c-name">New class name</label><input id="c-name" maxlength="80" placeholder="e.g. AS CS 12B"></div><button>Create class</button></form>
+  <div id="t-classes"></div>
+</section>
+</main>
+
+<script>
+const $ = id => document.getElementById(id);
+const show = v => document.querySelectorAll("main>section").forEach(s => s.classList.toggle("hidden", s.id !== v));
+const el = (tag, props = {}, ...kids) => { const e = Object.assign(document.createElement(tag), props); e.append(...kids); return e; };
+
+async function api(path, body) {
+  const r = await fetch(path, body === undefined ? {} :
+    {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(body)});
+  const data = await r.json().catch(() => ({}));
+  if (!r.ok) throw Object.assign(new Error(data.error || "Something went wrong"), {status: r.status});
+  return data;
+}
+
+// ---- auth ----
+let signingUp = false;
+$("auth-toggle").onclick = () => {
+  signingUp = !signingUp;
+  $("signup-only").classList.toggle("hidden", !signingUp);
+  $("auth-title").textContent = signingUp ? "Create an account" : "Log in";
+  $("auth-toggle").textContent = signingUp ? "Have an account? Log in" : "New here? Create an account";
+  $("a-pw").autocomplete = signingUp ? "new-password" : "current-password";
+};
+$("f-auth").onsubmit = async e => {
+  e.preventDefault();
+  const body = {email: $("a-email").value, password: $("a-pw").value};
+  if (signingUp) Object.assign(body, {name: $("a-name").value, role: $("a-role").value});
+  try { await api(signingUp ? "/api/register" : "/api/login", body); home(); }
+  catch (err) { $("auth-err").textContent = err.message; }
+};
+
+async function home() {
+  let me;
+  try { me = await api("/api/me"); } catch { return show("v-auth"); }
+  $("who").replaceChildren(`${me.name} · `, el("button", {className: "plain", textContent: "Log out",
+    onclick: async () => { await api("/api/logout", {}); $("who").textContent = ""; show("v-auth"); }}));
+  me.role === "teacher" ? teacher() : student(me);
+}
+
+// ---- student ----
+function student(me) {
+  show("v-student");
+  $("s-date").value = me.exam_date || "";
+  $("s-days").textContent = me.days_left == null ? "Set a date" : me.days_left < 0 ? "Done" : me.days_left;
+  $("s-learned").textContent = `${me.mastered}/${me.total}`;
+  $("s-today").textContent = me.daily_target == null ? me.answered_today : `${me.answered_today}/${me.daily_target}`;
+  $("s-chapters").replaceChildren(...Object.entries(me.chapters).map(([n, c]) => {
+    const pct = Math.round(100 * c.mastered / Math.max(c.total, 1));
+    return el("div", {className: "ch"},
+      el("span", {textContent: `${n}. ${c.title}`}),
+      el("div", {className: "bar", title: `${pct}%`}, el("i", {style: `width:${pct}%`})),
+      el("button", {className: "plain", textContent: "Go", onclick: () => practice(n)}));
+  }));
+}
+$("s-save-date").onclick = async () => { await api("/api/exam-date", {date: $("s-date").value}); home(); };
+$("s-start").onclick = () => practice(null);
+$("f-join").onsubmit = async e => {
+  e.preventDefault();
+  try { const r = await api("/api/join", {code: $("j-code").value}); $("join-msg").textContent = `Joined ${r.class}.`; $("j-code").value = ""; home(); }
+  catch (err) { $("join-msg").textContent = err.message; }
+};
+
+// ---- practice ----
+let current = null, chapterFilter = null;
+async function practice(chapter) {
+  chapterFilter = chapter;
+  current = await api("/api/next" + (chapter ? `?chapter=${chapter}` : ""));
+  show("v-practice");
+  $("p-chapter").textContent = `Chapter ${current.chapter}: ${current.chapter_title}` + (current.review ? " · review (all learned)" : "");
+  $("p-question").textContent = current.question;
+  $("p-marks").textContent = current.marks;
+  $("p-answer").value = ""; $("p-err").textContent = "";
+  $("p-result").classList.add("hidden");
+  $("p-answer").focus();
+}
+$("f-answer").onsubmit = async e => {
+  e.preventDefault();
+  try {
+    const r = await api("/api/answer", {qid: current.id, answer: $("p-answer").value});
+    $("p-score").textContent = `${r.score}/${r.max}`;
+    $("p-points").replaceChildren(...r.points.map(p => el("div", {className: "point " + (p.hit ? "hit" : "miss"), textContent: p.text})));
+    $("p-advice").textContent = r.score === r.max ? "Full marks. This question will come back later to check it sticks."
+      : "Read the points in red, close them, then explain the whole answer again in your own words.";
+    $("p-result").classList.remove("hidden");
+    $("p-result").scrollIntoView({behavior: "smooth"});
+  } catch (err) { $("p-err").textContent = err.message; }
+};
+$("p-retry").onclick = () => { $("p-answer").value = ""; $("p-result").classList.add("hidden"); $("p-answer").focus(); };
+$("p-next").onclick = () => practice(chapterFilter);
+$("p-back").onclick = home;
+
+// ---- teacher ----
+async function teacher() {
+  show("v-teacher");
+  const {classes, chapters} = await api("/api/classes");
+  $("t-classes").replaceChildren(...classes.map(c => {
+    const date = el("input", {type: "date", value: c.exam_date || ""});
+    const head = el("tr", {}, el("th", {textContent: "Student"}), el("th", {textContent: "Learned"}), el("th", {textContent: "Today"}),
+      ...Object.keys(chapters).map(n => el("th", {textContent: `Ch${n}`, title: chapters[n]})));
+    const rows = c.students.map(s => el("tr", {}, el("td", {textContent: s.name, title: s.email}),
+      el("td", {textContent: `${s.mastered}/${s.total}`}), el("td", {textContent: s.answered_today}),
+      ...Object.keys(chapters).map(n => el("td", {textContent: `${s.chapters[n]}%`}))));
+    return el("div", {className: "card"},
+      el("h2", {style: "margin-top:0", textContent: c.name}),
+      el("p", {className: "muted", textContent: `Join code: ${c.code} · ${c.students.length} students`}),
+      el("div", {className: "row"}, el("div", {}, el("label", {textContent: "Class exam date (sets it for every student)"}), date),
+        el("button", {className: "plain", textContent: "Save", onclick: async () => { await api("/api/class-exam-date", {class_id: c.id, date: date.value}); teacher(); }})),
+      c.students.length ? el("div", {className: "scroll"}, el("table", {}, head, ...rows)) : el("p", {className: "muted", textContent: "No students yet. Share the join code."}),
+      ...(c.weak_points.length ? [el("h2", {textContent: "Most-missed mark points"}),
+        ...c.weak_points.map(w => el("p", {}, el("b", {textContent: `${w.misses}× `}), w.point, el("br"), el("span", {className: "muted", textContent: w.question})))] : []));
+  }));
+}
+$("f-class").onsubmit = async e => { e.preventDefault(); await api("/api/classes", {name: $("c-name").value}); $("c-name").value = ""; teacher(); };
+
+home();
+</script>
+</body>
+</html>

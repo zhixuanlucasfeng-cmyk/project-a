@@ -1,0 +1,272 @@
+{
+  "_format": "Sample questions written for testing. Faisal's real mark-scheme data replaces these. Each point is one mark: it is earned when the answer contains at least one phrase from EVERY group in 'match'.",
+  "chapters": {
+    "1": "Information representation",
+    "2": "Communication",
+    "3": "Hardware",
+    "4": "Processor fundamentals",
+    "5": "System software",
+    "6": "Security, privacy and data integrity",
+    "7": "Ethics and ownership",
+    "8": "Databases",
+    "9": "Algorithm design and problem-solving",
+    "10": "Data types and structures",
+    "11": "Programming",
+    "12": "Software development"
+  },
+  "questions": [
+    {
+      "id": "1-1",
+      "chapter": "1",
+      "question": "Explain how a negative number is stored using two's complement.",
+      "points": [
+        {"text": "The most significant bit has a negative place value / is the sign bit", "match": [["most significant", "msb", "leftmost", "left most", "sign bit"]]},
+        {"text": "To negate: invert / flip all the bits", "match": [["invert", "flip", "one's complement", "ones complement"]]},
+        {"text": "...then add 1", "match": [["add 1", "add one", "plus 1", "plus one", "+1", "+ 1"]]}
+      ]
+    },
+    {
+      "id": "1-2",
+      "chapter": "1",
+      "question": "Explain the difference between lossy and lossless compression.",
+      "points": [
+        {"text": "Lossy permanently removes / discards data", "match": [["lossy"], ["remove", "discard", "lose", "lost", "permanently"]]},
+        {"text": "Lossless lets the original file be reconstructed exactly", "match": [["lossless"], ["original", "exactly", "reconstruct", "restore", "no data is lost", "no loss"]]},
+        {"text": "Example of a lossless technique: run-length encoding", "match": [["run-length", "run length", "rle"]]}
+      ]
+    },
+    {
+      "id": "2-1",
+      "chapter": "2",
+      "question": "Describe the differences between a LAN and a WAN.",
+      "points": [
+        {"text": "A LAN covers a small geographical area (e.g. one building / site)", "match": [["lan"], ["small", "single building", "one building", "one site", "same site"]]},
+        {"text": "A WAN covers a large geographical area", "match": [["wan"], ["large", "wide", "country", "countries", "world"]]},
+        {"text": "A WAN uses third-party / leased communication links; a LAN's infrastructure is owned by the organisation", "match": [["leased", "third party", "third-party", "telecom", "rented", "owned"]]}
+      ]
+    },
+    {
+      "id": "2-2",
+      "chapter": "2",
+      "question": "Explain the role of DNS when a user types a URL into a browser.",
+      "points": [
+        {"text": "The browser sends the domain name / URL to a DNS server", "match": [["dns server", "domain name server"]]},
+        {"text": "The DNS server looks up the matching IP address", "match": [["ip address", "ip"], ["look", "search", "find", "match", "convert", "translate", "resolve"]]},
+        {"text": "If not found, the request is passed to another (higher-level) DNS server", "match": [["another", "next", "higher", "other dns", "forward"]]},
+        {"text": "The IP address is returned to the browser so it can contact the web server", "match": [["return", "sent back", "send back", "reply"]]}
+      ]
+    },
+    {
+      "id": "3-1",
+      "chapter": "3",
+      "question": "State the differences between SRAM and DRAM.",
+      "points": [
+        {"text": "DRAM must be refreshed; SRAM does not", "match": [["refresh"]]},
+        {"text": "SRAM is faster to access", "match": [["sram"], ["faster", "quicker"]]},
+        {"text": "DRAM is cheaper / has higher density", "match": [["cheaper", "less expensive", "density", "more memory per chip", "more data per chip"]]},
+        {"text": "SRAM is used for cache memory", "match": [["cache"]]}
+      ]
+    },
+    {
+      "id": "3-2",
+      "chapter": "3",
+      "question": "Explain how a laser printer prints a page.",
+      "points": [
+        {"text": "A laser draws the image onto a charged drum", "match": [["laser"], ["drum"]]},
+        {"text": "The charge is removed where the laser hits / an electrostatic image forms", "match": [["charge", "static", "electrostatic"]]},
+        {"text": "Toner sticks to the charged areas of the drum", "match": [["toner"]]},
+        {"text": "The toner is transferred to paper and fused with heat", "match": [["fuse", "fuser", "heat", "melt"]]}
+      ]
+    },
+    {
+      "id": "4-1",
+      "chapter": "4",
+      "question": "Describe the fetch stage of the fetch-execute cycle using register transfer notation or words.",
+      "points": [
+        {"text": "The address in the PC is copied to the MAR", "match": [["pc", "program counter"], ["mar", "memory address register"]]},
+        {"text": "The PC is incremented", "match": [["increment", "pc + 1", "pc+1", "pc <- pc", "pc ← pc", "add one", "add 1", "plus 1", "plus one"]]},
+        {"text": "The instruction at that address is copied into the MDR", "match": [["mdr", "memory data register"]]},
+        {"text": "The contents of the MDR are copied to the CIR", "match": [["cir", "current instruction register"]]}
+      ]
+    },
+    {
+      "id": "4-2",
+      "chapter": "4",
+      "question": "Explain what an interrupt is and how the processor handles it.",
+      "points": [
+        {"text": "An interrupt is a signal from a device / program asking for the processor's attention", "match": [["signal"]]},
+        {"text": "The processor checks for interrupts at the end of each fetch-execute cycle", "match": [["end of", "after each", "each cycle", "every cycle"]]},
+        {"text": "The current register contents are saved (e.g. on a stack)", "match": [["save", "stack", "store"]]},
+        {"text": "The interrupt service routine (ISR) is run", "match": [["isr", "interrupt service routine", "interrupt handler", "service routine"]]},
+        {"text": "The saved values are restored and the original task resumes", "match": [["restore", "resume", "reload", "continue"]]}
+      ]
+    },
+    {
+      "id": "5-1",
+      "chapter": "5",
+      "question": "Compare a compiler and an interpreter.",
+      "points": [
+        {"text": "A compiler translates the whole program at once before running", "match": [["compiler"], ["whole", "entire", "all at once", "complete program"]]},
+        {"text": "An interpreter translates and executes one line / statement at a time", "match": [["interpreter"], ["line by line", "line-by-line", "one line", "each line", "one statement", "each statement"]]},
+        {"text": "A compiler produces an executable file / object code", "match": [["executable", "object code", ".exe", "machine code file"]]},
+        {"text": "An interpreter stops at the first error, making debugging easier", "match": [["first error", "stops at", "halts", "debug"]]}
+      ]
+    },
+    {
+      "id": "5-2",
+      "chapter": "5",
+      "question": "State three tasks carried out by an operating system.",
+      "points": [
+        {"text": "Memory management", "match": [["memory management", "manages memory", "manage memory", "allocates memory", "allocate memory"]]},
+        {"text": "Process management / scheduling", "match": [["process", "scheduling", "multitasking"]]},
+        {"text": "File management", "match": [["file"]]},
+        {"text": "Security management (e.g. user accounts)", "match": [["security", "user account", "password", "access right"]]},
+        {"text": "Hardware / peripheral management (drivers)", "match": [["hardware", "peripheral", "driver", "device"]]}
+      ]
+    },
+    {
+      "id": "6-1",
+      "chapter": "6",
+      "question": "Explain the difference between data validation and data verification.",
+      "points": [
+        {"text": "Validation checks that data is reasonable / sensible / meets rules", "match": [["validation"], ["reasonable", "sensible", "rule", "allowed", "acceptable", "within"]]},
+        {"text": "Validation cannot check the data is correct", "match": [["not correct", "doesn't check", "does not check", "can't check", "cannot check", "not necessarily correct", "not accurate"]]},
+        {"text": "Verification checks data has been copied / entered accurately (matches the original)", "match": [["verification"], ["copied", "entered", "transferred", "original", "match", "same"]]},
+        {"text": "Example method: double entry / visual check / parity check / checksum", "match": [["double entry", "visual check", "parity", "checksum", "range check", "format check", "presence check", "length check", "type check"]]}
+      ]
+    },
+    {
+      "id": "6-2",
+      "chapter": "6",
+      "question": "Explain how a firewall helps protect a network.",
+      "points": [
+        {"text": "It sits between the network and the internet / external network", "match": [["between", "boundary", "gateway"]]},
+        {"text": "It inspects incoming and outgoing traffic / packets", "match": [["traffic", "packet", "incoming", "outgoing"]]},
+        {"text": "It blocks traffic that doesn't meet a set of rules / criteria", "match": [["block", "reject", "deny", "prevent", "stop"]]}
+      ]
+    },
+    {
+      "id": "7-1",
+      "chapter": "7",
+      "question": "Explain the difference between free software and freeware.",
+      "points": [
+        {"text": "Free software gives users the freedom to view and modify the source code", "match": [["free software"], ["source code", "modify", "change", "study"]]},
+        {"text": "Free software can be redistributed (possibly modified)", "match": [["redistribute", "share", "distribute", "pass on"]]},
+        {"text": "Freeware costs nothing but the source code is not available / cannot be modified", "match": [["freeware"], ["no source", "not available", "cannot modify", "can't modify", "cannot be modified", "can't be modified", "not be modified", "closed"]]}
+      ]
+    },
+    {
+      "id": "7-2",
+      "chapter": "7",
+      "question": "Explain why a software developer should follow a professional code of conduct such as the BCS or IEEE code.",
+      "points": [
+        {"text": "To act in the public interest / protect public safety", "match": [["public"]]},
+        {"text": "To act honestly / with integrity towards clients and employers", "match": [["honest", "integrity", "client", "employer"]]},
+        {"text": "To maintain and develop their professional competence", "match": [["competen", "skill", "training", "up to date"]]}
+      ]
+    },
+    {
+      "id": "8-1",
+      "chapter": "8",
+      "question": "Explain what is meant by a primary key and a foreign key.",
+      "points": [
+        {"text": "A primary key uniquely identifies each record / tuple in a table", "match": [["primary key"], ["unique"]]},
+        {"text": "A foreign key is an attribute in one table that is the primary key of another table", "match": [["foreign key"], ["another table", "other table", "different table", "second table"]]},
+        {"text": "Foreign keys are used to create relationships between tables", "match": [["relationship", "link", "join"]]}
+      ]
+    },
+    {
+      "id": "8-2",
+      "chapter": "8",
+      "question": "Explain what is needed for a table to be in third normal form (3NF).",
+      "points": [
+        {"text": "The table is in 2NF (and therefore 1NF)", "match": [["2nf", "second normal form"]]},
+        {"text": "There are no non-key dependencies / transitive dependencies", "match": [["non-key", "non key", "transitive"]]},
+        {"text": "Every non-key attribute depends only on the primary key", "match": [["only on the", "only depend", "depends only", "fully dependent", "the key, the whole key"]]}
+      ]
+    },
+    {
+      "id": "9-1",
+      "chapter": "9",
+      "question": "Describe how a linear search works.",
+      "points": [
+        {"text": "Start at the first element", "match": [["first", "start", "beginning"]]},
+        {"text": "Compare each element in turn with the item being searched for", "match": [["compare", "check"], ["each", "every", "in turn", "one by one", "next"]]},
+        {"text": "Stop when the item is found", "match": [["found", "match"]]},
+        {"text": "...or when the end of the list is reached (item not present)", "match": [["end of", "last element", "last item", "not present", "not found", "not in the"]]}
+      ]
+    },
+    {
+      "id": "9-2",
+      "chapter": "9",
+      "question": "Explain why abstraction and decomposition are useful when solving a problem.",
+      "points": [
+        {"text": "Abstraction removes unnecessary detail / keeps only what is relevant", "match": [["abstraction"], ["unnecessary", "irrelevant", "remov", "hide", "hiding", "only the relevant", "essential"]]},
+        {"text": "Decomposition breaks the problem into smaller sub-problems", "match": [["decomposition"], ["smaller", "sub-problem", "subproblem", "sub problem", "break"]]},
+        {"text": "Smaller parts are easier to solve / test / can be shared between programmers", "match": [["easier", "simpler", "test", "team", "share", "separately", "parallel"]]}
+      ]
+    },
+    {
+      "id": "10-1",
+      "chapter": "10",
+      "question": "Explain how a stack works and state one use of a stack.",
+      "points": [
+        {"text": "A stack is LIFO (last in, first out)", "match": [["lifo", "last in first out", "last in, first out", "last-in first-out", "last-in, first-out"]]},
+        {"text": "Items are pushed onto / popped off the top", "match": [["push", "pop"]]},
+        {"text": "A pointer keeps track of the top of the stack", "match": [["top"], ["pointer", "index"]]},
+        {"text": "A use: interrupt handling / procedure calls / reversing data / undo", "match": [["interrupt", "procedure call", "subroutine", "recursion", "return address", "revers", "undo", "back button"]]}
+      ]
+    },
+    {
+      "id": "10-2",
+      "chapter": "10",
+      "question": "Explain what a record data type is and why it is useful.",
+      "points": [
+        {"text": "A record is a composite / user-defined data type", "match": [["composite", "user-defined", "user defined"]]},
+        {"text": "It groups several related fields / items of data", "match": [["field", "related", "group"]]},
+        {"text": "The fields can be of different data types", "match": [["different data type", "different type", "different data types", "different types", "mixed type"]]}
+      ]
+    },
+    {
+      "id": "11-1",
+      "chapter": "11",
+      "question": "Explain the difference between passing a parameter by value and by reference.",
+      "points": [
+        {"text": "By value: a copy of the data is passed", "match": [["by value", "byval"], ["copy"]]},
+        {"text": "By value: changes in the procedure do not affect the original variable", "match": [["not affect", "doesn't affect", "does not affect", "not change", "unchanged", "original is not", "original stays"]]},
+        {"text": "By reference: the address of / a pointer to the variable is passed", "match": [["by reference", "byref"], ["address", "pointer", "location", "reference to"]]},
+        {"text": "By reference: changes in the procedure change the original variable", "match": [["changes the original", "change the original", "original is changed", "original variable is changed", "affects the original", "affect the original", "original changes", "original value changes"]]}
+      ]
+    },
+    {
+      "id": "11-2",
+      "chapter": "11",
+      "question": "Explain the difference between a procedure and a function.",
+      "points": [
+        {"text": "A function returns a value", "match": [["function"], ["return"]]},
+        {"text": "A procedure does not return a value", "match": [["procedure"], ["no value", "not return", "doesn't return", "does not return", "no return"]]},
+        {"text": "A function call can be used in an expression / assignment", "match": [["expression", "assign", "right-hand", "right hand", "x ←", "x <-"]]}
+      ]
+    },
+    {
+      "id": "12-1",
+      "chapter": "12",
+      "question": "Describe the stages of the waterfall model and one drawback of it.",
+      "points": [
+        {"text": "Stages run in order: analysis, design, coding, testing, maintenance", "match": [["analysis"], ["design"], ["cod", "implement"], ["test"]]},
+        {"text": "Each stage must be completed before the next begins", "match": [["before the next", "completed before", "complete before", "one after", "in order", "sequential", "linear"]]},
+        {"text": "Drawback: hard to go back / change requirements; working software only appears late", "match": [["go back", "difficult to change", "hard to change", "change requirement", "late", "end of the project", "inflexible", "not flexible"]]}
+      ]
+    },
+    {
+      "id": "12-2",
+      "chapter": "12",
+      "question": "Explain the difference between white-box and black-box testing.",
+      "points": [
+        {"text": "White-box testing uses knowledge of the code / tests every path", "match": [["white"], ["code", "path", "internal", "structure", "logic"]]},
+        {"text": "Black-box testing only checks inputs against expected outputs", "match": [["black"], ["input", "output", "expected"]]},
+        {"text": "Black-box testers do not look at the code", "match": [["without", "not look", "don't look", "do not look", "no knowledge", "don't know", "unknown", "not see", "can't see", "cannot see"]]}
+      ]
+    }
+  ]
+}
