@@ -2,15 +2,12 @@ services:
   - type: web
     name: project-a
     runtime: python
-    plan: starter
+    plan: free
     buildCommand: "true"
     startCommand: python3 server.py
     envVars:
       - key: PROJECT_A_DB
-        value: /var/data/project_a.db
+        value: /tmp/project_a.db
       - key: HTTPS
         value: "1"
-    disk:
-      name: data
-      mountPath: /var/data
-      sizeGB: 1
+    
